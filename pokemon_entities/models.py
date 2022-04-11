@@ -13,3 +13,7 @@ class Pokemon(models.Model):
         verbose_name = 'Покемон'
         verbose_name_plural = 'Покемоны'
 
+
+class PokemonEntity(models.Model):
+    lat = models.FloatField(verbose_name='Широта')
+    lon = models.FloatField(verbose_name='Долгота')
