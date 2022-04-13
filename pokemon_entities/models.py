@@ -29,3 +29,10 @@ class PokemonEntity(models.Model):
     defence = models.IntegerField(default=1, verbose_name='Защита')
     stamina = models.IntegerField(default=1, verbose_name='Выносливость')
 
+    def __str__(self):
+        return f'{self.pokemon} ({self.lat}, {self.lon})'
+
+    class Meta:
+        verbose_name = 'Особь'
+        verbose_name_plural = 'Особи'
+
