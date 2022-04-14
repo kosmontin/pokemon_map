@@ -64,6 +64,7 @@ def show_pokemon(request, pokemon_id):
     pokemon = Pokemon.objects.get(pk=pokemon_id)
     evolve_from_pokemon = Pokemon.objects.filter(
         pk=pokemon.evolve_from_id).first()
+    evolve_to_pokemon = pokemon.evolve_to.all().first()
     serialized_pokemon = {
         'pokemon_id': pokemon.pk,
         'title_ru': pokemon.title,
@@ -77,6 +78,12 @@ def show_pokemon(request, pokemon_id):
             'pokemon_id': evolve_from_pokemon.pk,
             'title_ru': evolve_from_pokemon.title,
             'img_url': evolve_from_pokemon.image.url
+        }
+    if evolve_to_pokemon:
+        serialized_pokemon['next_evolution'] = {
+            'pokemon_id': evolve_to_pokemon.pk,
+            'title_ru': evolve_to_pokemon.title,
+            'img_url': evolve_to_pokemon.image.url
         }
     pokemon_entities = PokemonEntity.objects.filter(pokemon=pokemon)
 

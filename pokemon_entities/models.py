@@ -21,7 +21,8 @@ class Pokemon(models.Model):
     )
     evolve_from = models.ForeignKey(
         'self', null=True, blank=True,
-        default=None, on_delete=models.SET_DEFAULT,
+        related_name='evolve_to',
+        default=None, on_delete=models.SET_NULL,
         verbose_name='Из кого эволюционировал'
     )
 
