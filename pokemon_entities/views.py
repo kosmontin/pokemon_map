@@ -65,7 +65,8 @@ def show_pokemon(request, pokemon_id):
     serialized_pokemon = {
         'pokemon_id': pokemon.pk,
         'title_ru': pokemon.title,
-        'img_url': pokemon.image.url
+        'img_url': pokemon.image.url,
+        'description': pokemon.description
     }
     pokemon_entities = PokemonEntity.objects.filter(pokemon=pokemon)
 
