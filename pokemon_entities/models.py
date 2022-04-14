@@ -36,11 +36,17 @@ class Pokemon(models.Model):
 
 class PokemonEntity(models.Model):
     '''Особь'''
-    pokemon = models.ForeignKey(Pokemon, default=None, on_delete=models.CASCADE)
+    pokemon = models.ForeignKey(
+        Pokemon, default=None, on_delete=models.CASCADE
+    )
     lat = models.FloatField(verbose_name='Широта')
     lon = models.FloatField(verbose_name='Долгота')
-    appeared_at = models.DateTimeField(default=datetime.datetime.now(), verbose_name='Появится')
-    disappeared_at = models.DateTimeField(default=None, verbose_name='Пропадет')
+    appeared_at = models.DateTimeField(
+        default=datetime.datetime.now(), verbose_name='Появится'
+    )
+    disappeared_at = models.DateTimeField(
+        default=None, verbose_name='Пропадет'
+    )
     level = models.IntegerField(default=1, verbose_name='Уровень')
     health = models.IntegerField(default=1, verbose_name='Здоровье')
     strength = models.IntegerField(default=1, verbose_name='Атака')
