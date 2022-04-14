@@ -1,10 +1,11 @@
-import folium
+import datetime
 import json
 
+import folium
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
-from .models import Pokemon, PokemonEntity
 
+from .models import Pokemon, PokemonEntity
 
 MOSCOW_CENTER = [55.751244, 37.618423]
 DEFAULT_IMAGE_URL = (
@@ -28,7 +29,9 @@ def add_pokemon(folium_map, lat, lon, image_url=DEFAULT_IMAGE_URL):
 
 
 def show_all_pokemons(request):
-    pokemon_entities = PokemonEntity.objects.all()
+    pokemon_entities = PokemonEntity.objects.filter(
+        disappeared_at__gte=datetime.datetime.now()
+    )
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for entity in pokemon_entities:
