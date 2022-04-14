@@ -19,6 +19,11 @@ class Pokemon(models.Model):
         max_length=500, blank=True,
         null=True, verbose_name='Описание'
     )
+    evolve_from = models.ForeignKey(
+        'self', null=True, blank=True,
+        default=None, on_delete=models.SET_DEFAULT,
+        verbose_name='Из кого эволюционировал'
+    )
 
     def __str__(self):
         return self.title

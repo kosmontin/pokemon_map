@@ -62,14 +62,22 @@ def show_all_pokemons(request):
 
 def show_pokemon(request, pokemon_id):
     pokemon = Pokemon.objects.get(pk=pokemon_id)
+    evolve_from_pokemon = Pokemon.objects.filter(
+        pk=pokemon.evolve_from_id).first()
     serialized_pokemon = {
         'pokemon_id': pokemon.pk,
         'title_ru': pokemon.title,
         'title_en': pokemon.title_en,
         'title_jp': pokemon.title_jp,
         'img_url': pokemon.image.url,
-        'description': pokemon.description
+        'description': pokemon.description,
     }
+    if evolve_from_pokemon:
+        serialized_pokemon['previous_evolution'] = {
+            'pokemon_id': evolve_from_pokemon.pk,
+            'title_ru': evolve_from_pokemon.title,
+            'img_url': evolve_from_pokemon.image.url
+        }
     pokemon_entities = PokemonEntity.objects.filter(pokemon=pokemon)
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
