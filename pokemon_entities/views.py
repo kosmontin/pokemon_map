@@ -65,6 +65,8 @@ def show_pokemon(request, pokemon_id):
     serialized_pokemon = {
         'pokemon_id': pokemon.pk,
         'title_ru': pokemon.title,
+        'title_en': pokemon.title_en,
+        'title_jp': pokemon.title_jp,
         'img_url': pokemon.image.url,
         'description': pokemon.description
     }
