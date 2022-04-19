@@ -29,8 +29,8 @@ def add_pokemon(folium_map, lat, lon, image_url=DEFAULT_IMAGE_URL):
 
 
 def show_all_pokemons(request):
-    # TODO: Add appeared_at__lte to filter
     pokemon_entities = PokemonEntity.objects.filter(
+        appeared_at__lte=datetime.datetime.now(),
         disappeared_at__gte=datetime.datetime.now()
     )
 
@@ -85,8 +85,10 @@ def show_pokemon(request, pokemon_id):
             'title_ru': evolve_to_pokemon.title,
             'img_url': evolve_to_pokemon.image.url
         }
-    # TODO: Add disappeared_at__gte and appeared_at__lte to filter
-    pokemon_entities = pokemon.entities.all()
+    pokemon_entities = pokemon.entities.filter(
+        disappeared_at__gte=datetime.datetime.now(),
+        appeared_at__lte=datetime.datetime.now()
+    )
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon_entity in pokemon_entities:
