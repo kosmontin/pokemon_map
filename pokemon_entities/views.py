@@ -63,8 +63,7 @@ def show_all_pokemons(request):
 
 def show_pokemon(request, pokemon_id):
     pokemon = Pokemon.objects.get(pk=pokemon_id)
-    evolve_from_pokemon = Pokemon.objects.filter(
-        pk=pokemon.evolve_from_id).first()
+    evolve_from_pokemon = pokemon.evolve_from
     evolve_to_pokemon = pokemon.evolve_to.all().first()
     serialized_pokemon = {
         'pokemon_id': pokemon.pk,
@@ -87,7 +86,7 @@ def show_pokemon(request, pokemon_id):
             'img_url': evolve_to_pokemon.image.url
         }
     # TODO: Add disappeared_at__gte and appeared_at__lte to filter
-    pokemon_entities = PokemonEntity.objects.filter(pokemon=pokemon)
+    pokemon_entities = pokemon.entities.all()
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon_entity in pokemon_entities:
