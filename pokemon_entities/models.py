@@ -38,7 +38,7 @@ class PokemonEntity(models.Model):
     lat = models.FloatField(verbose_name='Широта')
     lon = models.FloatField(verbose_name='Долгота')
     appeared_at = models.DateTimeField(
-        default=datetime.datetime.now(), verbose_name='Появится'
+        default=None, verbose_name='Появится'
     )
     disappeared_at = models.DateTimeField(
         default=None, verbose_name='Пропадет'
