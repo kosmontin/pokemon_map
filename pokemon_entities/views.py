@@ -85,6 +85,7 @@ def show_pokemon(request, pokemon_id):
             'title_ru': evolve_to_pokemon.title,
             'img_url': evolve_to_pokemon.image.url
         }
+    # TODO: Add disappeared_at__gte to filter
     pokemon_entities = PokemonEntity.objects.filter(pokemon=pokemon)
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
